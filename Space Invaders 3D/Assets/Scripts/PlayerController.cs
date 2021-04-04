@@ -36,18 +36,36 @@ public class PlayerController : MonoBehaviour
     private float rollInput;
     public float rollSpeed = 90f, rollAcceleration = 3.5f;
 
+    public int maxHealth = 10;
+    public int currentHealth;
+    public HealthBar healthBar;
+
     // Start is called before the first frame update
     private void Start()
     {
-        screenCenter.x = Screen.width * .5f;
-        screenCenter.y = Screen.height * .5f;
+       screenCenter.x = Screen.width * .5f;
+       screenCenter.y = Screen.height * .5f;
 
-        Cursor.lockState = CursorLockMode.Confined;
+      Cursor.lockState = CursorLockMode.Confined;
+
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+    }
+
+    void TakeDamage(int damage)
+    {
+        currentHealth = currentHealth - damage;
+        healthBar.SetHealth(currentHealth);
     }
 
     // Update is called once per frame
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            TakeDamage(20);
+        }
+
         lookInput.x = Input.mousePosition.x;
         lookInput.y = Input.mousePosition.y;
 
