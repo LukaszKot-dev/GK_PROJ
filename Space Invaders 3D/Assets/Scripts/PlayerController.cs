@@ -37,25 +37,39 @@ public class PlayerController : MonoBehaviour
     public float rollSpeed = 90f, rollAcceleration = 3.5f;
 
     public int maxHealth = 10;
-    public int currentHealth;
-    public HealthBar healthBar;
+
+    [SerializeField]
+    private int currentHealth;
+
+    public delegate void HealthUpdated();
+
+    public HealthUpdated healthUpdated;
 
     // Start is called before the first frame update
     private void Start()
     {
-       screenCenter.x = Screen.width * .5f;
-       screenCenter.y = Screen.height * .5f;
+        screenCenter.x = Screen.width * .5f;
+        screenCenter.y = Screen.height * .5f;
 
-      Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Confined;
 
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
     }
 
-    void TakeDamage(int damage)
+    public int CurrentHealth()
     {
-        currentHealth = currentHealth - damage;
-        healthBar.SetHealth(currentHealth);
+        return currentHealth;
+    }
+
+    public void UpdateHealth(int val)
+    {
+        currentHealth -= val;
+        if (healthUpdated != null) healthUpdated();
+    }
+
+    private void TakeDamage(int damage)
+    {
+        UpdateHealth(-damage);
     }
 
     // Update is called once per frame

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.23315534, g: 0.23638168, b: 0.27299175, a: 1}
+  m_IndirectSpecularColor: {r: 0.49780262, g: 0.49780262, b: 0.49780262, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2929,7 +2929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ed7e7e4a914b9459bf8f66d651fd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  slider: {fileID: 1140490095}
   gradient:
     serializedVersion: 2
     key0: {r: 0.6603774, g: 0, b: 0, a: 1}
@@ -5082,6 +5082,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1712256399}
   m_CullTransparentMesh: 1
+--- !u!1 &1736932130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1736932132}
+  - component: {fileID: 1736932131}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1736932131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736932130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1141de7f393540428688f2704430be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1736932132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736932130}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 572.8372, y: 278.66336, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1753201251
 GameObject:
   m_ObjectHideFlags: 0
@@ -5464,7 +5507,6 @@ GameObject:
   - component: {fileID: 1934022038}
   - component: {fileID: 1934022037}
   - component: {fileID: 1934022035}
-  - component: {fileID: 1934022040}
   m_Layer: 0
   m_Name: Look_Camera
   m_TagString: Untagged
@@ -5546,22 +5588,6 @@ Transform:
   m_Father: {fileID: 1263021789}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1934022040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934022034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a3e5f51e31f79c4fb340e92ffc286e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedNormal: 10
-  speedFast: 50
-  mouseSensitivityX: 5
-  mouseSensitivityY: 5
 --- !u!1 &1997638035
 GameObject:
   m_ObjectHideFlags: 0
