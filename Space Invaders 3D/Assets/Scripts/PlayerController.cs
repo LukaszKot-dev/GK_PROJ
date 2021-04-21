@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
     private float rollInput;
     public float rollSpeed = 90f, rollAcceleration = 3.5f;
 
+    //Parametry do upgradu
+
     public int maxHealth = 10;
 
     [SerializeField]
@@ -72,12 +74,20 @@ public class PlayerController : MonoBehaviour
         UpdateHealth(-damage);
     }
 
+    private void Shoot()
+    {
+    }
+
     // Update is called once per frame
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             TakeDamage(20);
+        }
+        if (Input.GetButtonDown("Shot"))
+        {
+            Shoot();
         }
 
         lookInput.x = Input.mousePosition.x;
