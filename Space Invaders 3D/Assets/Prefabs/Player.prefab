@@ -730,6 +730,8 @@ MonoBehaviour:
   rollAcceleration: 3.5
   maxHealth: 10
   currentHealth: 0
+  projectile: {fileID: 4937537581778689606, guid: 78f63540064753c488d370b709a2b823,
+    type: 3}
 --- !u!1 &6567766484478251089
 GameObject:
   m_ObjectHideFlags: 0

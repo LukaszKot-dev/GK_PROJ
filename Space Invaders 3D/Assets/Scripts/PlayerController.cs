@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
 
     public HealthUpdated healthUpdated;
 
+    public GameObject projectile;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -76,6 +78,10 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
+        var projectileInstance = Instantiate(projectile);
+        projectileInstance.transform.position = transform.position;
+        projectileInstance.GetComponent<Rigidbody>().AddForce(Vector3.forward * 9000f);
+        projectileInstance.GetComponent<Projectile>();
     }
 
     // Update is called once per frame
