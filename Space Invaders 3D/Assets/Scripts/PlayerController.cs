@@ -80,7 +80,8 @@ public class PlayerController : MonoBehaviour
     {
         var projectileInstance = Instantiate(projectile);
         projectileInstance.transform.position = transform.position;
-        projectileInstance.GetComponent<Rigidbody>().AddForce(Vector3.forward * 9000f);
+
+        projectileInstance.GetComponent<Rigidbody>().AddForce(transform.rotation * Vector3.forward * 9000f);
         projectileInstance.GetComponent<Projectile>();
     }
 
@@ -102,7 +103,7 @@ public class PlayerController : MonoBehaviour
         mouseDistance.x = (lookInput.x - screenCenter.x) / screenCenter.y;
         mouseDistance.y = (lookInput.y - screenCenter.y) / screenCenter.y;
 
-        mouseDistance = Vector2.ClampMagnitude(mouseDistance, 1f);
+        mouseDistance = Vector2.ClampMagnitude(mouseDistance, 1f);      //Zwraca
 
         // rollInput = Mathf.Lerp(rollInput, Input.GetAxis("Roll"), rollAcceleration * Time.deltaTime);
         rollInput = 0;
