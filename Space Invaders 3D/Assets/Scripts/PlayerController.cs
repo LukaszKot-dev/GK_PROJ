@@ -34,7 +34,8 @@ public class PlayerController : MonoBehaviour
     public Text timeCounter;
     public float startTime;
 
-    public float shootForce = 5000f;
+    public float shootForce = 50000f;
+
 
 
     public float lookRateSpeed = 90f;
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
     private float rollInput;
     public float rollSpeed = 90f, rollAcceleration = 3.5f;
 
+    private float knockbackTime = 0f;
     //Parametry do upgradu
 
     public int maxHealth = 10;
@@ -57,8 +59,6 @@ public class PlayerController : MonoBehaviour
 
     public GameObject projectile;
 
-    private Rigidbody rb;
-
     // Start is called before the first frame update
     private void Start()
     {
@@ -70,7 +70,6 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
 
         currentHealth = maxHealth;
-        rb = GetComponent<Rigidbody>();
     }
 
     public int CurrentHealth()
@@ -97,6 +96,7 @@ public class PlayerController : MonoBehaviour
         projectileInstance.transform.rotation = transform.rotation;
         projectileInstance.GetComponent<Rigidbody>().AddForce(transform.rotation * Vector3.forward * shootForce);
         projectileInstance.GetComponent<Projectile>();
+        Debug.Log("Shoot");
     }
 
     public string currentTime()
@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
 
     public void KnockBack()
     {
-        rb.AddRelativeForce(Vector3.back * 1000f);
+        knockbackTime = 1f;
     }
 
     private void Update()
@@ -150,10 +150,17 @@ public class PlayerController : MonoBehaviour
 
         transform.position += transform.forward * activeforwardSpeed * Time.deltaTime;
         transform.position += (transform.right * activeStrefaSpeed * Time.deltaTime) + (transform.up * activeHoverSpeed * Time.deltaTime);
+        if (knockbackTime > 0)
+        {
+            transform.position += transform.forward * -1 * 100f * knockbackTime * Time.deltaTime;
+            knockbackTime -= Time.deltaTime;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("KnockBack");
+
         if (other.tag == "Mine")
         {
             TakeDamage(10);
