@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
     public Text timeCounter;
     public float startTime;
 
+    public float shootForce = 5000f;
+
+
     public float lookRateSpeed = 90f;
 
     private Vector2 lookInput, screenCenter, mouseDistance;
@@ -54,6 +57,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject projectile;
 
+    private Rigidbody rb;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -65,6 +70,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
 
         currentHealth = maxHealth;
+        rb = GetComponent<Rigidbody>();
     }
 
     public int CurrentHealth()
@@ -80,15 +86,16 @@ public class PlayerController : MonoBehaviour
 
     private void TakeDamage(int damage)
     {
+        Debug.Log("Damage taken: " + damage);
         UpdateHealth(-damage);
     }
 
     private void Shoot()
     {
         var projectileInstance = Instantiate(projectile);
-        projectileInstance.transform.position = transform.position;
-
-        projectileInstance.GetComponent<Rigidbody>().AddForce(transform.rotation * Vector3.forward * 9000f);
+        projectileInstance.transform.position = transform.position + Vector3.down * 3;
+        projectileInstance.transform.rotation = transform.rotation;
+        projectileInstance.GetComponent<Rigidbody>().AddForce(transform.rotation * Vector3.forward * shootForce);
         projectileInstance.GetComponent<Projectile>();
     }
 
@@ -106,6 +113,12 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    public void KnockBack()
+    {
+        rb.AddRelativeForce(Vector3.back * 1000f);
+    }
+
     private void Update()
     {
         TimeControll();
@@ -125,7 +138,7 @@ public class PlayerController : MonoBehaviour
         mouseDistance.x = (lookInput.x - screenCenter.x) / screenCenter.y;
         mouseDistance.y = (lookInput.y - screenCenter.y) / screenCenter.y;
 
-        mouseDistance = Vector2.ClampMagnitude(mouseDistance, 1f);      //Zwraca
+        mouseDistance = Vector2.ClampMagnitude(mouseDistance, 1f);
 
         // rollInput = Mathf.Lerp(rollInput, Input.GetAxis("Roll"), rollAcceleration * Time.deltaTime);
         rollInput = 0;
@@ -137,5 +150,17 @@ public class PlayerController : MonoBehaviour
 
         transform.position += transform.forward * activeforwardSpeed * Time.deltaTime;
         transform.position += (transform.right * activeStrefaSpeed * Time.deltaTime) + (transform.up * activeHoverSpeed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Mine")
+        {
+            TakeDamage(10);
+        }
+        if (other.tag == "EnemyMissile")
+        {
+        }
+        KnockBack();
     }
 }
