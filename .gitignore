@@ -3,7 +3,7 @@
 # =============== #
 [Ll]ibrary/
 [Tt]emp/
-[Ll]ogs/
+/[Ll]ogs/
 [Oo]bj/
 3rdParty/
 Builds/
@@ -28,7 +28,7 @@ obj/
 # ===================================== #
 *.pidb.meta
 sysinfo.txt
-
+*.log
 # ============ #
 # OS generated #
 # ============ #
