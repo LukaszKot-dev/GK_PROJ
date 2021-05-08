@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Text timeScoreText;
+
+    public void Setup(string score)
     {
-        
+        Time.timeScale = 0f;
+        gameObject.SetActive(true);
+        timeScoreText.text = "Your time: " + score;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadMenu()
     {
-        
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

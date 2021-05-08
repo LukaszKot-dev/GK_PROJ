@@ -6,8 +6,10 @@ public class GameManager : MonoBehaviour
     public PlayerController Player;
     public GameObject PlayerObject;
     public HealthBar HealthBar;
+    public int points;
     public GameObject mainMenuObj;
     public MainMenu mainMenu;
+    public GameOver GameOver;
     public bool gameHasEnded = false;
 
     private void Awake()
@@ -19,7 +21,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ShowMainMenu();
-   //     TimerController.instance.BeginTimer();
     }
 
     private void ShowMainMenu()
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        HealthBar.SetHealth(Player.CurrentHealth());
+      //  HealthBar.SetHealth(Player.CurrentHealth());
     }
 
     // Update is called once per frame
@@ -38,13 +39,13 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void GameOver()
-    {
+    public void GameEnded(string currentTime)
+    { 
         if (gameHasEnded == false)
         {
             gameHasEnded = true;
             Debug.Log("Game over");
-            //Game Over Menu
+            GameOver.Setup(currentTime);
         }
         
     }

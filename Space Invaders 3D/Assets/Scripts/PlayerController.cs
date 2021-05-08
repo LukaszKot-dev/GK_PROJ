@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    GameManager gameManager;
+
     [SerializeField]
     public float forwardSpeed = 10.0f;
 
@@ -46,11 +48,10 @@ public class PlayerController : MonoBehaviour
     private float knockbackTime = 0f;
     //Parametry do upgradu
 
+    public HealthBar healthBar;
     public int maxHealth = 10;
-
     [SerializeField]
     private int currentHealth;
-
     public Text currentHealthText;
 
     public delegate void HealthUpdated();
@@ -62,36 +63,37 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         startTime = Time.time;
 
         screenCenter.x = Screen.width * .5f;
         screenCenter.y = Screen.height * .5f;
 
         Cursor.lockState = CursorLockMode.Confined;
-
+        currentHealth = maxHealth;
         currentHealthText.text = maxHealth.ToString();
-    }
-
-    public int CurrentHealth()
-    {
-        return currentHealth;
-    }
+    } 
 
     public void UpdateHealth(int val)
     {
-        currentHealth -= val;
-        if (healthUpdated != null) healthUpdated();
+        currentHealth = currentHealth-val;
+     //   if (healthUpdated != null) healthUpdated();
         currentHealthText.text = currentHealth.ToString();
     }
 
     private void TakeDamage(int damage)
     {
         Debug.Log("Damage taken: " + damage);
-        UpdateHealth(-damage);
+        UpdateHealth(damage);
         if (currentHealth <= 0)
         {
-            FindObjectOfType<GameManager>().GameOver();
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        gameManager.GameEnded(timeCounter.text);
     }
 
     private void Shoot()
