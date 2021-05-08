@@ -3772,6 +3772,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6567766483758978153, guid: 00c1c7130bd03624da3c4c8e4d7a01e7,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6567766483758978153, guid: 00c1c7130bd03624da3c4c8e4d7a01e7,
+        type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
@@ -3867,6 +3872,11 @@ PrefabInstance:
       objectReference: {fileID: 734539328}
     - target: {fileID: 6567766484306795850, guid: 00c1c7130bd03624da3c4c8e4d7a01e7,
         type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6567766484306795850, guid: 00c1c7130bd03624da3c4c8e4d7a01e7,
+        type: 3}
       propertyPath: shootForce
       value: 10000
       objectReference: {fileID: 0}
@@ -3880,5 +3890,10 @@ PrefabInstance:
       propertyPath: currentHealthText
       value: 
       objectReference: {fileID: 1637799659}
+    - target: {fileID: 6567766484478251090, guid: 00c1c7130bd03624da3c4c8e4d7a01e7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00c1c7130bd03624da3c4c8e4d7a01e7, type: 3}

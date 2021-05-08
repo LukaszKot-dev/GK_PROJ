@@ -48,11 +48,11 @@ public class PlayerController : MonoBehaviour
     private float knockbackTime = 0f;
     //Parametry do upgradu
 
-    public HealthBar healthBar;
-    public int maxHealth = 10;
+    public int maxHealth = 100;
     [SerializeField]
     private int currentHealth;
     public Text currentHealthText;
+    public HealthBar healthbar;
 
     public delegate void HealthUpdated();
 
@@ -74,10 +74,10 @@ public class PlayerController : MonoBehaviour
         currentHealthText.text = maxHealth.ToString();
     } 
 
-    public void UpdateHealth(int val)
+    public void UpdateHealth(int damage)
     {
-        currentHealth = currentHealth-val;
-     //   if (healthUpdated != null) healthUpdated();
+        currentHealth -= damage;
+        healthbar.SetHealth(currentHealth);
         currentHealthText.text = currentHealth.ToString();
     }
 
@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Damage taken: " + damage);
         UpdateHealth(damage);
+
         if (currentHealth <= 0)
         {
             Die();
