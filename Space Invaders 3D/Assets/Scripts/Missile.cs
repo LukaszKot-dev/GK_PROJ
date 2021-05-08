@@ -15,7 +15,7 @@ public class Missile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         rb.velocity = transform.forward * rocketFlySpeed;
 

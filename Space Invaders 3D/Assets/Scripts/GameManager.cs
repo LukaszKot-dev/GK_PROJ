@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,11 +10,16 @@ public class GameManager : MonoBehaviour
     public GameObject PlayerObject;
     public HealthBar HealthBar;
     public GameObject mainMenuObj;
+    private float _currency = 0;
+    public float Currency { get { return _currency; } set { _currency = value; PlayerPrefs.SetFloat("Wallet", value); } }
     public MainMenu mainMenu;
     public bool gameHasEnded = false;
+    public bool gameHasStarted = false;
+    public float gameTime = 0.0f;
 
     private void Awake()
     {
+        LoadData();
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
@@ -30,15 +34,26 @@ public class GameManager : MonoBehaviour
             Player.healthUpdated += UpdateHealthBar;
     }
 
+    private void LoadData()
+    {
+        Currency = PlayerPrefs.GetFloat("Wallet");
+    }
+
     private void Start()
     {
         ShowMainMenu();
-   //     TimerController.instance.BeginTimer();
+        //     TimerController.instance.BeginTimer();
     }
 
     private void ShowMainMenu()
     {
         GameObject.Instantiate(mainMenuObj);
+    }
+
+    public void StartGame()
+    {
+        gameTime = 0;
+        gameHasStarted = true;
     }
 
     private void UpdateHealthBar()
@@ -49,7 +64,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-
+        if (gameHasStarted)
+            gameTime += Time.deltaTime;
     }
 
     public void GameOver()
@@ -60,6 +76,5 @@ public class GameManager : MonoBehaviour
             Debug.Log("Game over");
             //Game Over Menu
         }
-        
     }
 }

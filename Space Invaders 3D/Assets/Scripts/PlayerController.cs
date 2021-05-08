@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     public Text timeCounter;
+
     public float startTime;
 
     public float shootForce = 50000f;
@@ -106,15 +107,15 @@ public class PlayerController : MonoBehaviour
 
     public string currentTime()
     {
-        return timeCounter.text; 
+        return timeCounter.text;
     }
 
     private void TimeControll()
     {
-            float t = Time.time - startTime;
-            string minutes = ((int)t / 60).ToString();
-            string seconds = (t % 60).ToString("f0");
-            timeCounter.text = minutes + ":" + seconds;
+        float t = Time.time - startTime;
+        string minutes = ((int)t / 60).ToString();
+        string seconds = (t % 60).ToString("f0");
+        timeCounter.text = minutes + ":" + seconds;
     }
 
     // Update is called once per frame
@@ -136,7 +137,10 @@ public class PlayerController : MonoBehaviour
         {
             Shoot();
         }
+    }
 
+    private void FixedUpdate()
+    {
         lookInput.x = Input.mousePosition.x;
         lookInput.y = Input.mousePosition.y;
 
@@ -174,5 +178,10 @@ public class PlayerController : MonoBehaviour
         {
         }
         KnockBack();
+    }
+
+    public Vector3 PositionNear(float distance)
+    {
+        return Random.insideUnitSphere * distance;
     }
 }
