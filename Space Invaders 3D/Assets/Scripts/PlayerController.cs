@@ -36,8 +36,6 @@ public class PlayerController : MonoBehaviour
 
     public float shootForce = 50000f;
 
-
-
     public float lookRateSpeed = 90f;
 
     private Vector2 lookInput, screenCenter, mouseDistance;
@@ -52,6 +50,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private int currentHealth;
+
+    public Text currentHealthText;
 
     public delegate void HealthUpdated();
 
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Confined;
 
-        currentHealth = maxHealth;
+        currentHealthText.text = maxHealth.ToString();
     }
 
     public int CurrentHealth()
@@ -81,12 +81,17 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth -= val;
         if (healthUpdated != null) healthUpdated();
+        currentHealthText.text = currentHealth.ToString();
     }
 
     private void TakeDamage(int damage)
     {
         Debug.Log("Damage taken: " + damage);
         UpdateHealth(-damage);
+        if (currentHealth <= 0)
+        {
+            FindObjectOfType<GameManager>().GameOver();
+        }
     }
 
     private void Shoot()

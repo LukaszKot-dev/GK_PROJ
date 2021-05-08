@@ -8,11 +8,7 @@ public class GameManager : MonoBehaviour
     public HealthBar HealthBar;
     public GameObject mainMenuObj;
     public MainMenu mainMenu;
-    public TimerController timerController;
-
-
-    //Waluta do gry
-    public float currentMoneyQuantity;
+    public bool gameHasEnded = false;
 
     private void Awake()
     {
@@ -39,10 +35,17 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+
     }
 
     public void GameOver()
     {
-        Debug.Log("game over");
+        if (gameHasEnded == false)
+        {
+            gameHasEnded = true;
+            Debug.Log("Game over");
+            //Game Over Menu
+        }
+        
     }
 }
