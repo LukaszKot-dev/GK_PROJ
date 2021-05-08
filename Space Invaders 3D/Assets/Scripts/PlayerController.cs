@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -29,6 +30,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     public float LiftAcceleration = 2.0f;
 
+    [SerializeField]
+    public Text timeCounter;
+    public float startTime;
+
     public float lookRateSpeed = 90f;
 
     private Vector2 lookInput, screenCenter, mouseDistance;
@@ -52,6 +57,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        startTime = Time.time;
+
         screenCenter.x = Screen.width * .5f;
         screenCenter.y = Screen.height * .5f;
 
@@ -85,9 +92,24 @@ public class PlayerController : MonoBehaviour
         projectileInstance.GetComponent<Projectile>();
     }
 
+    public string currentTime()
+    {
+        return timeCounter.text; 
+    }
+
+    private void TimeControll()
+    {
+            float t = Time.time - startTime;
+            string minutes = ((int)t / 60).ToString();
+            string seconds = (t % 60).ToString("f0");
+            timeCounter.text = minutes + ":" + seconds;
+    }
+
     // Update is called once per frame
     private void Update()
     {
+        TimeControll();
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             TakeDamage(20);

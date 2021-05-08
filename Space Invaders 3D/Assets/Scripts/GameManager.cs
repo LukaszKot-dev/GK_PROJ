@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class GameManager : MonoBehaviour
     public HealthBar HealthBar;
     public GameObject mainMenuObj;
     public MainMenu mainMenu;
+    public TimerController timerController;
+
 
     //Waluta do gry
     public float currentMoneyQuantity;
@@ -20,6 +23,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ShowMainMenu();
+   //     TimerController.instance.BeginTimer();
     }
 
     private void ShowMainMenu()
@@ -39,5 +43,6 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        Debug.Log("game over");
     }
 }
