@@ -5147,3 +5147,35 @@ Received Import Request.
 Start importing Assets/Scenes/Game/Game.unity using Guid(8499180ef45ef474a9d62c14f4c18fe1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3102da4c32823861468c06e691b672bc') in 0.024004 seconds
   Import took 0.026620 seconds .
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000484 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.21 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.635 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.22 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1151 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 63.0 MB.
+System memory in use after: 63.1 MB.
+
+Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 1786.
+Total: 1.440500 ms (FindLiveObjects: 0.145200 ms CreateObjectMapping: 0.051000 ms MarkObjects: 1.229900 ms  DeleteObjects: 0.013300 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 589.141711 seconds.
+  path: Assets/Scenes/Game/Game.unity
+  artifactKey: Guid(8499180ef45ef474a9d62c14f4c18fe1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Game/Game.unity using Guid(8499180ef45ef474a9d62c14f4c18fe1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f003a236e7956f166defb968d91bcd63') in 0.014396 seconds
+  Import took 0.016918 seconds .
+
