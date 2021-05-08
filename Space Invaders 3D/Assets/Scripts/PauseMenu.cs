@@ -36,20 +36,17 @@ public class PauseMenu : MonoBehaviour
     void Pause()
     {
         Time.timeScale = 0f;
-        //     TimerController.instance.EndTimer();
         pauseMenuUI.SetActive(true);
         gameIsPaused = true;
     }
 
     public void LoadMenu()
     {
-   //     TimerController.instance.EndTimer();
         SceneManager.LoadScene("Menu");
     }
 
     public void QuitGame()
     {
-   //     TimerController.instance.EndTimer();
         Application.Quit();
     }
 }
