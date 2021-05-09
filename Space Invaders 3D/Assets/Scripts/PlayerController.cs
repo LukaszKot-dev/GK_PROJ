@@ -134,10 +134,6 @@ public class PlayerController : MonoBehaviour
     {
         TimeControll();
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            TakeDamage(20);
-        }
         if (Input.GetButtonDown("Shot"))
         {
             Shoot();
