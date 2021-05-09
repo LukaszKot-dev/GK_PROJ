@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -6,13 +7,17 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get { return _instance; } }
 
+    [Range(1, 10)]
+    public int DifficultyLevel = 1;
+
     public PlayerController Player;
     public GameObject PlayerObject;
     public HealthBar HealthBar;
     public int points;
     public GameObject mainMenuObj;
     private float _currency = 0;
-    public float Currency { get { return _currency; } set { _currency = value; Debug.Log("Coins: " + value); PlayerPrefs.SetFloat("Wallet", value); } }
+    public float Currency { get { return _currency; } set { _currency = value; Debug.Log("Coins: " + value); if (Player) { Player.SetMoney(value); } PlayerPrefs.SetFloat("Wallet", value); } }
+    public float BestTime { get { return PlayerPrefs.GetFloat("TimeRecord"); } set { if (PlayerPrefs.GetFloat("TimeRecord") < value) PlayerPrefs.SetFloat("TimeRecord", value); } }
     public MainMenu mainMenu;
     public GameOver GameOver;
     public bool gameHasEnded = false;
@@ -43,7 +48,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ShowMainMenu();
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+            ShowMainMenu();
+        else
+            StartGame();
     }
 
     private void ShowMainMenu()
@@ -65,17 +73,24 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (gameHasStarted)
-            gameTime += Time.deltaTime;
+        gameTime += Time.deltaTime;
     }
 
-    public void GameEnded(string currentTime)
+    public void GameEnded(float currentTime)
     {
         if (gameHasEnded == false)
         {
             gameHasEnded = true;
             Debug.Log("Game over");
-            GameOver.Setup(currentTime);
+            BestTime = currentTime;
+            GameOver.Setup("" + currentTime);
         }
+    }
+
+    public void ReloadScene()
+    {
+        StartGame();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
     }
 }

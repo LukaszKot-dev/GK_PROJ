@@ -6,12 +6,15 @@ public class PlayerController : MonoBehaviour
     private GameManager gameManager;
 
     [SerializeField]
+    [Range(10f, 200f)]
     public float forwardSpeed = 10.0f;
 
     [SerializeField]
+    [Range(10f, 200f)]
     public float strafaSpeed = 10.0f;
 
     [SerializeField]
+    [Range(10f, 200f)]
     public float LiftForce = 10.0f;
 
     [SerializeField]
@@ -34,6 +37,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     public Text timeCounter;
+
+    public Text moneyText;
 
     public float startTime;
 
@@ -75,6 +80,12 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         currentHealth = maxHealth;
         currentHealthText.text = maxHealth.ToString();
+        SetMoney(GameManager.Instance.Currency);
+    }
+
+    public void SetMoney(float money)
+    {
+        moneyText.text = money.ToString();
     }
 
     public void UpdateHealth(int damage)
@@ -97,7 +108,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        gameManager.GameEnded(timeCounter.text);
+        gameManager.GameEnded(Time.time - startTime);
     }
 
     private void Shoot()
@@ -118,8 +129,8 @@ public class PlayerController : MonoBehaviour
     private void TimeControll()
     {
         float t = Time.time - startTime;
-        string minutes = ((int)t / 60).ToString();
-        string seconds = (t % 60).ToString("f0");
+        string minutes = ((int)t / 60).ToString("D2");
+        string seconds = ((int)(t % 60)).ToString("D2");
         timeCounter.text = minutes + ":" + seconds;
     }
 
@@ -191,7 +202,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 PositionNear(float distance)
     {
         var pos = Random.insideUnitSphere * distance;
-        while (Vector3.Distance(transform.position, pos) < 50f)
+        while (Vector3.Distance(transform.position, pos) < 90f)
             pos = Random.insideUnitSphere * distance;
         return pos;
     }

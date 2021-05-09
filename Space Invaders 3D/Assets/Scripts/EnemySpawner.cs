@@ -7,14 +7,20 @@ public class EnemySpawner : MonoBehaviour
     public GameObject Missile;
     public GameObject Coin;
 
+    public float MineRepeatTime = 10f;
+    public float MissileRepeatTime = 30f;
+    public float CoinRepeatTime = 10f;
+    public float MissileRocket = 10f;
+    public float MissileRocketSpawnStartTime = 30f;
     public float spawnDistance = 200f;
 
     private void Start()
     {
-        StartCoroutine(SpawnMineRepeat(1.0f, 10));
-        StartCoroutine(SpawnMissileRepeat(30));
-        StartCoroutine(SpawnCoinRepeat(10));
-        StartCoroutine(SpawnMissileRocketRepeat(30));
+        var hardity = (float)GameManager.Instance.DifficultyLevel;
+        StartCoroutine(SpawnMineRepeat(1.0f, MineRepeatTime / hardity));
+        StartCoroutine(SpawnMissileRepeat(MissileRepeatTime / hardity));
+        StartCoroutine(SpawnCoinRepeat(CoinRepeatTime / hardity));
+        StartCoroutine(SpawnMissileRocketRepeat(MissileRocket / hardity));
     }
 
     // Update is called once per frame
@@ -68,7 +74,8 @@ public class EnemySpawner : MonoBehaviour
     {
         while (!GameManager.Instance.gameHasEnded)
         {
-            if ((int)GameManager.Instance.gameTime > 60)
+            Debug.Log("Game Time: " + GameManager.Instance.gameTime);
+            if ((int)GameManager.Instance.gameTime > MissileRocketSpawnStartTime)
             {
                 int gameMinute = (int)GameManager.Instance.gameTime / 30 + 1;
                 SpawnMissileRocket(gameMinute * 10, gameMinute);
