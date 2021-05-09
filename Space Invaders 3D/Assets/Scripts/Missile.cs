@@ -6,6 +6,7 @@ public class Missile : MonoBehaviour
 
     private Rigidbody rb;
 
+    public GameObject ExplosionParticle;
     public float turnSpeed = 1f;
     public float rocketFlySpeed = 10f;
 
@@ -30,13 +31,7 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("PlayersProjectile"))
-        {
-            Destroy(gameObject);
-        }
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            //DestroyObj();
-        }
+        Instantiate(ExplosionParticle, transform.position, Camera.current.transform.rotation);
+        Destroy(gameObject);
     }
 }

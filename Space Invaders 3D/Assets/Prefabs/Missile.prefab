@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RocketTarget: {fileID: 0}
+  ExplosionParticle: {fileID: 100004, guid: 82019e923dca94848916b96b8f98a352, type: 3}
   turnSpeed: 1
   rocketFlySpeed: 10
 --- !u!54 &2737519449939842598

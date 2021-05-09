@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    GameManager gameManager;
+    private GameManager gameManager;
 
     [SerializeField]
     public float forwardSpeed = 10.0f;
@@ -50,8 +50,10 @@ public class PlayerController : MonoBehaviour
     //Parametry do upgradu
 
     public int maxHealth = 100;
+
     [SerializeField]
     private int currentHealth;
+
     public Text currentHealthText;
     public HealthBar healthbar;
 
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         currentHealth = maxHealth;
         currentHealthText.text = maxHealth.ToString();
-    } 
+    }
 
     public void UpdateHealth(int damage)
     {
@@ -176,15 +178,25 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Mine")
         {
             TakeDamage(10);
+            KnockBack();
         }
         if (other.tag == "EnemyMissile")
         {
+            TakeDamage(30);
+            KnockBack();
         }
-        KnockBack();
+        if (other.tag == "Coin")
+        {
+            GameManager.Instance.Currency += 100f;
+            Destroy(other.gameObject);
+        }
     }
 
     public Vector3 PositionNear(float distance)
     {
-        return Random.insideUnitSphere * distance;
+        var pos = Random.insideUnitSphere * distance;
+        while (Vector3.Distance(transform.position, pos) < 50f)
+            pos = Random.insideUnitSphere * distance;
+        return pos;
     }
 }
